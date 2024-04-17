@@ -1,0 +1,119 @@
+$folderBgColor: #3338ee;
+$folderTextColor: #fff;
+$folderBorderColor: #111;
+$folderShadowColor: #111;
+$folderRadius: 8px;
+$folderPropertiesBgColor: #333;
+
+.folder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  $f: &;
+
+  &__list {
+    flex-direction: column;
+  }
+
+  &__row {
+    flex-direction: row;
+  }
+
+  &--properties {
+    display: flex;
+    position: absolute;
+    width: auto;
+    height: 0;
+    flex-direction: column;
+    gap: 6px;
+    opacity: 0;
+    visibility: none;
+    z-index: -10;
+    transition: all 0.3 linear;
+    box-sizing: border-box;
+    color: #fff;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 3px 0px;
+
+    div {
+      padding: 6px 14px;
+      transition: all 0.3s linear;
+      z-index: 2;
+    }
+
+    p {
+      margin: 0;
+      font-size: 12px;
+      transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      &:hover {
+        color: lightcoral;
+      }
+    }
+
+    &:hover {
+      div {
+        background-color: #333;
+        color: #fff;
+      }
+    }
+
+    &__show {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+  }
+
+  &--layer--wrapper {
+    border-radius: $folderRadius;
+    box-shadow: 0 0 6px 0 $folderShadowColor;
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+
+    &--layer1,
+    &--layer2,
+    &--layer3 {
+      background-color: $folderBgColor;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: $folderRadius;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    &--layer1 {
+      opacity: 0.5;
+    }
+    &--layer2 {
+      transform-origin: bottom left;
+      z-index: -2;
+    }
+
+    &--layer3 {
+      transform: rotate(10deg);
+      transform-origin: bottom right;
+      z-index: -3;
+    }
+  }
+
+  &:hover {
+    #{$f}--layer--wrapper {
+      &--layer2 {
+        transform: rotate(-30deg);
+      }
+
+      &--layer3 {
+        transform: rotate(30deg);
+      }
+    }
+  }
+}
